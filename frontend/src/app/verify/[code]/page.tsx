@@ -1,7 +1,78 @@
 'use client';
 
 import { useState, useEffect, Suspense } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { useParams } from 'next/navigation';
+
+const MOCK_CREDENTIALS: Record<string, any> = {
+  'CRED-20240115-ABC123': {
+    id: '1',
+    name: 'Bằng Cử nhân Công nghệ Thông tin',
+    description: 'Bằng cấp loại Giỏi, chuyên ngành Công nghệ Thông tin',
+    status: 'confirmed',
+    verifyCode: 'CRED-20240115-ABC123',
+    issuedAt: '2024-01-15T00:00:00Z',
+    txHash: '0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef',
+    tokenId: '1',
+    ipfsHash: 'QmXyZ1234567890abcdef',
+    fileHash: 'a1b2c3d4e5f6789012345678901234567890abcdef1234567890abcdef',
+    student: {
+      name: 'Nguyễn Văn A',
+      email: 'nguyenvana@example.com',
+      studentCode: 'SV001'
+    }
+  },
+  'CRED-20240125-DEF456': {
+    id: '2',
+    name: 'Bằng Kỹ sư Khoa học Máy tính',
+    description: 'Bằng cấp loại Khá, chuyên ngành Khoa học Máy tính',
+    status: 'confirmed',
+    verifyCode: 'CRED-20240125-DEF456',
+    issuedAt: '2024-01-25T00:00:00Z',
+    txHash: '0xabcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890',
+    tokenId: '2',
+    ipfsHash: 'QmAbc7890123456',
+    fileHash: 'fedcba0987654321fedcba0987654321fedcba0987654321fedcba0987654',
+    student: {
+      name: 'Trần Thị B',
+      email: 'tranthib@example.com',
+      studentCode: 'SV002'
+    }
+  },
+  'CRED-20240201-GHI789': {
+    id: '3',
+    name: 'Bằng Cử nhân Quản trị Kinh doanh',
+    description: 'Bằng cấp loại Giỏi, chuyên ngành Quản trị Kinh doanh',
+    status: 'issued',
+    verifyCode: 'CRED-20240201-GHI789',
+    issuedAt: '2024-02-01T00:00:00Z',
+    txHash: '0x1111222233334444555566667777888899990000aaaabbbbccccddddeeeeffff',
+    tokenId: '3',
+    ipfsHash: 'QmXyz123456789',
+    fileHash: '1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcd',
+    student: {
+      name: 'Lê Văn C',
+      email: 'levanc@example.com',
+      studentCode: 'SV003'
+    }
+  },
+  'CRED-20240210-JKL012': {
+    id: '4',
+    name: 'Bằng Cử nhân Kế toán',
+    description: 'Bằng cấp loại Khá, chuyên ngành Kế toán',
+    status: 'pending',
+    verifyCode: 'CRED-20240210-JKL012',
+    issuedAt: null,
+    txHash: null,
+    tokenId: null,
+    ipfsHash: null,
+    fileHash: 'abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890',
+    student: {
+      name: 'Phạm Thị D',
+      email: 'phamthid@example.com',
+      studentCode: 'SV004'
+    }
+  }
+};
 
 interface Credential {
   id: string;
@@ -22,8 +93,8 @@ interface Credential {
 }
 
 function VerifyContent() {
-  const searchParams = useSearchParams();
-  const code = searchParams.get('code');
+  const params = useParams();
+  const code = params.code as string;
   
   const [credential, setCredential] = useState<Credential | null>(null);
   const [loading, setLoading] = useState(true);
@@ -38,18 +109,12 @@ function VerifyContent() {
   }, [code]);
 
   const fetchCredential = async (verifyCode: string) => {
-    try {
-      const res = await fetch(`http://localhost:3000/credentials/verify/${verifyCode}`);
-      if (!res.ok) {
-        setError('Không tìm thấy văn bằng');
-        return;
-      }
-      const data = await res.json();
-      setCredential(data);
-    } catch (err) {
-      setError('Lỗi khi tải thông tin văn bằng');
-    } finally {
-      setLoading(false);
+    setLoading(false);
+    const mockData = MOCK_CREDENTIALS[verifyCode];
+    if (mockData) {
+      setCredential(mockData);
+    } else {
+      setError('Không tìm thấy văn bằng với mã: ' + verifyCode);
     }
   };
 
