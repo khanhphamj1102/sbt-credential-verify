@@ -504,7 +504,7 @@ function VerifyContent() {
                   className="flex items-center justify-center gap-2 p-4 bg-blue-50 rounded-xl hover:bg-blue-100 transition-colors"
                 >
                   <ExternalLink className="h-5 w-5 text-blue-600" />
-                  <span className="text-blue-600 font-medium">Xem file gốc trên IPFS</span>
+                  <span className="text-blue-600 font-medium">Xem File gốc trên IPFS</span>
                 </a>
               </div>
             )}
