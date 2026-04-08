@@ -46,7 +46,7 @@ export default function DemoPage() {
     <div className="min-h-screen bg-gray-50">
       <header className="bg-white border-b">
         <div className="max-w-3xl mx-auto px-4 py-4 flex justify-between items-center">
-          <Link href="/" className="text-lg font-semibold text-gray-900 hover:text-primary transition-colors">
+          <Link href="https://sbt-credential-student.vercel.app" className="text-lg font-semibold text-gray-900 hover:text-primary transition-colors">
             ← Quay lại
           </Link>
           <span className="text-sm bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full">
