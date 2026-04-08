@@ -212,7 +212,7 @@ function VerifyContent() {
           </div>
           <h1 className="text-2xl font-bold text-gray-900 mb-2">Văn bằng không hợp lệ</h1>
           <p className="text-gray-500 mb-6">{error || 'Không tìm thấy văn bằng với mã này'}</p>
-          <a href={process.env.NEXT_PUBLIC_HOME_URL || '/'} className="inline-block px-6 py-3 bg-primary hover:bg-primary/90 text-white rounded-lg transition-colors">
+          <a href="https://sbt-credential-student.vercel.app" className="inline-block px-6 py-3 bg-primary hover:bg-primary/90 text-white rounded-lg transition-colors">
             Quay lại trang chủ
           </a>
         </div>
@@ -225,7 +225,7 @@ function VerifyContent() {
       <header className="bg-white border-b">
         <div className="max-w-3xl mx-auto px-4 py-4 flex justify-between items-center">
           <span className="text-lg font-semibold text-gray-900">SBT Credential</span>
-          <a href={process.env.NEXT_PUBLIC_HOME_URL} className="text-sm text-gray-500 hover:text-gray-900 transition-colors">Trang chủ</a>
+          <a href="https://sbt-credential-student.vercel.app" className="text-sm text-gray-500 hover:text-gray-900 transition-colors">Trang chủ</a>
         </div>
       </header>
 
